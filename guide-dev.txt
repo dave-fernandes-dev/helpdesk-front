@@ -16,7 +16,13 @@ https://www.npmjs.com/package/@angular/cli
 //criar um projeto com a versao do angular 12.2.13 sem instalar globalmente, eu mesmo uso varias versoes no meu pc, para estudo
 npx -p @angular/cli@12.2.13 ng new helpdesk-front 
 
-cd helpdesk-front  //para entrar no projeto criado
+//para entrar no projeto criado
+cd helpdesk-front  
 
-npx ng s -o   //para executar o  codigo sem ter o angular instalado, mas sim usar a versao local do projeto
+//instalar angular material ao projeto, o npx é pra usar o angular do projeto e não o global 
+//yes to ALL
+npx ng add @angular/material
+
+//para executar o  codigo sem ter o angular instalado, mas sim usar a versao local do projeto
+npx ng s -o   
 
