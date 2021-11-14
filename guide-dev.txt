@@ -1,0 +1,22 @@
+//instalar nodejs
+sudo apt install nodejs 
+
+//ver a versao instalada
+nodejs -v  ou node -v   
+
+//instalar o npm 
+sudo apt install npm 
+
+//ver a versao instalada
+npm -v    
+
+//para  instalar o angular/cli em detalhes se quiser
+https://www.npmjs.com/package/@angular/cli     
+
+//criar um projeto com a versao do angular 11.2.14 sem instalar globalmente, eu mesmo uso varias versoes no meu pc, para estudo
+npx -p @angular/cli@12.2.13 ng new helpdesk-front 
+
+cd helpdesk-front  //para entrar no projeto criado
+
+npx ng s -o   //para executar o  codigo sem ter o angular instalado, mas sim usar a versao local do projeto
+
