@@ -23,6 +23,9 @@ cd helpdesk-front
 //yes to ALL
 npx ng add @angular/material
 
+//instalar toastr e --save é para não limitar ao ambiente development, mas ir tbm em ambiente de produção 
+npm i ngx-toastr --save
+
 //para executar o  codigo sem ter o angular instalado, mas sim usar a versao local do projeto
 npx ng s -o   
 
