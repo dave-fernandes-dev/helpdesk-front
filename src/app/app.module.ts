@@ -26,6 +26,7 @@ import { MatInputModule } from '@angular/material/input';
 import { MatIconModule } from '@angular/material/icon';
 import { MatListModule } from '@angular/material/list';
 import { MatCardModule } from '@angular/material/card';
+import { ToastrModule } from 'ngx-toastr';
 
 @NgModule({
   declarations: [
@@ -42,7 +43,7 @@ import { MatCardModule } from '@angular/material/card';
 
     // Requisições http
     HttpClientModule,
-    
+
     // Angular Material
     MatFormFieldModule,
     MatPaginatorModule,
@@ -58,6 +59,7 @@ import { MatCardModule } from '@angular/material/card';
     MatIconModule,
     MatListModule,
     MatCardModule,
+    ToastrModule.forRoot({timeOut: 4000, closeButton: true, progressBar: true})
   ],
   providers: [],
   bootstrap: [AppComponent]
