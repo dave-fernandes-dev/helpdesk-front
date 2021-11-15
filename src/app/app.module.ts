@@ -1,3 +1,4 @@
+import { AuthInterceptorProvider } from './interceptors/auth.interceptor';
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 
@@ -61,7 +62,7 @@ import { ToastrModule } from 'ngx-toastr';
     MatCardModule,
     ToastrModule.forRoot({timeOut: 4000, closeButton: true, progressBar: true})
   ],
-  providers: [],
+  providers: [AuthInterceptorProvider],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
