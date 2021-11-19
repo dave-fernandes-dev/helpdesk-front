@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormControl, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
+import { BaseComponent } from 'src/app/models/BaseComponent';
 import { Cliente } from 'src/app/models/cliente';
 import { ClienteService } from 'src/app/services/cliente.service';
 
@@ -11,7 +12,7 @@ import { ClienteService } from 'src/app/services/cliente.service';
   templateUrl: './cliente-update.component.html',
   styleUrls: ['./cliente-update.component.css']
 })
-export class ClienteUpdateComponent implements OnInit {
+export class ClienteUpdateComponent extends BaseComponent implements OnInit {
 
   cliente: Cliente = {
     id:         '',
@@ -33,7 +34,9 @@ export class ClienteUpdateComponent implements OnInit {
     private toast:    ToastrService,
     private router:          Router,
     private route:   ActivatedRoute,
-    ) { }
+    ) {
+    super();
+  }
 
   ngOnInit(): void {
     this.cliente.id = this.route.snapshot.paramMap.get('id');
@@ -42,8 +45,9 @@ export class ClienteUpdateComponent implements OnInit {
 
   findById(): void {
     this.service.findById(this.cliente.id).subscribe(resposta => {
-      resposta.perfis = []
+      resposta.perfis = this.replace(resposta.perfis) 
       this.cliente = resposta;
+      this.setPerfilChecked(this.cliente.perfis);
     })
   }
 

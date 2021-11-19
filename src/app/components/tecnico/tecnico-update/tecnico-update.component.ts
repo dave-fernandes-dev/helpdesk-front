@@ -1,7 +1,9 @@
+
 import { Component, OnInit } from '@angular/core';
 import { FormControl, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
+import { BaseComponent } from 'src/app/models/BaseComponent';
 import { Tecnico } from 'src/app/models/tecnico';
 import { TecnicoService } from 'src/app/services/tecnico.service';
 
@@ -11,7 +13,7 @@ import { TecnicoService } from 'src/app/services/tecnico.service';
   templateUrl: './tecnico-update.component.html',
   styleUrls: ['./tecnico-update.component.css']
 })
-export class TecnicoUpdateComponent implements OnInit {
+export class TecnicoUpdateComponent extends BaseComponent implements OnInit {
 
   tecnico: Tecnico = {
     id:         '',
@@ -33,7 +35,9 @@ export class TecnicoUpdateComponent implements OnInit {
     private toast:    ToastrService,
     private router:          Router,
     private route:   ActivatedRoute,
-    ) { }
+    ) {
+    super();
+  }
 
   ngOnInit(): void {
     this.tecnico.id = this.route.snapshot.paramMap.get('id');
@@ -42,8 +46,9 @@ export class TecnicoUpdateComponent implements OnInit {
 
   findById(): void {
     this.service.findById(this.tecnico.id).subscribe(resposta => {
-      resposta.perfis = []
+      resposta.perfis = this.replace(resposta.perfis) 
       this.tecnico = resposta;
+      this.setPerfilChecked(this.tecnico.perfis);
     })
   }
 
@@ -68,7 +73,6 @@ export class TecnicoUpdateComponent implements OnInit {
     } else {
       this.tecnico.perfis.push(perfil);
     }
-    
   }
   
   validaCampos(): boolean {
