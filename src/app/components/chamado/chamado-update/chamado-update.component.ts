@@ -27,6 +27,7 @@ export class ChamadoUpdateComponent implements OnInit {
     nomeTecnico: '',
   }
 
+  ENCERRADO: boolean = false;
   clientes: Cliente[] = []
   tecnicos: Tecnico[] = []
 
@@ -56,6 +57,7 @@ export class ChamadoUpdateComponent implements OnInit {
   findById(): void {
     this.chamadoService.findById(this.chamado.id).subscribe(resposta => {
       this.chamado = resposta;
+      this.ENCERRADO=this.isClosed()
     }, ex => {
       this.toastService.error(ex.error.error);
     })
@@ -85,6 +87,10 @@ export class ChamadoUpdateComponent implements OnInit {
   validaCampos(): boolean {
     return this.prioridade.valid && this.status.valid && this.titulo.valid 
        && this.observacoes.valid && this.tecnico.valid && this.cliente.valid
+  }
+
+  isClosed(): boolean {
+    return this.chamado.status=='2';
   }
 
   retornaStatus(status: any): string {
