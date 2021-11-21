@@ -1,3 +1,4 @@
+import { BaseComponent } from './../../../models/BaseComponent';
 import { Component, OnInit } from '@angular/core';
 import { FormControl, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
@@ -10,7 +11,7 @@ import { ClienteService } from 'src/app/services/cliente.service';
   templateUrl: './cliente-delete.component.html',
   styleUrls: ['./cliente-delete.component.css']
 })
-export class ClienteDeleteComponent implements OnInit {
+export class ClienteDeleteComponent extends BaseComponent implements OnInit {
 
   cliente: Cliente = {
     id:         '',
@@ -27,7 +28,9 @@ export class ClienteDeleteComponent implements OnInit {
     private toast:    ToastrService,
     private router:          Router,
     private route:   ActivatedRoute,
-    ) { }
+    ) {
+    super();
+  }
 
   ngOnInit(): void {
     this.cliente.id = this.route.snapshot.paramMap.get('id');
@@ -36,8 +39,9 @@ export class ClienteDeleteComponent implements OnInit {
 
   findById(): void {
     this.service.findById(this.cliente.id).subscribe(resposta => {
-      resposta.perfis = []
+      resposta.perfis = this.replace(resposta.perfis) 
       this.cliente = resposta;
+      this.setPerfilChecked(this.cliente.perfis);
     })
   }
 
