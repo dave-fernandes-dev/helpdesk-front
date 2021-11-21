@@ -1,3 +1,4 @@
+import { BaseComponent } from './../../../models/BaseComponent';
 import { Component, OnInit } from '@angular/core';
 import { FormControl, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
@@ -10,7 +11,7 @@ import { TecnicoService } from 'src/app/services/tecnico.service';
   templateUrl: './tecnico-delete.component.html',
   styleUrls: ['./tecnico-delete.component.css']
 })
-export class TecnicoDeleteComponent implements OnInit {
+export class TecnicoDeleteComponent extends BaseComponent implements OnInit {
 
   tecnico: Tecnico = {
     id:         '',
@@ -27,7 +28,9 @@ export class TecnicoDeleteComponent implements OnInit {
     private toast:    ToastrService,
     private router:          Router,
     private route:   ActivatedRoute,
-    ) { }
+    ) {
+    super();
+  }
 
   ngOnInit(): void {
     this.tecnico.id = this.route.snapshot.paramMap.get('id');
@@ -36,8 +39,9 @@ export class TecnicoDeleteComponent implements OnInit {
 
   findById(): void {
     this.service.findById(this.tecnico.id).subscribe(resposta => {
-      resposta.perfis = []
+      resposta.perfis = this.replace(resposta.perfis) 
       this.tecnico = resposta;
+      this.setPerfilChecked(this.tecnico.perfis);
     })
   }
 
