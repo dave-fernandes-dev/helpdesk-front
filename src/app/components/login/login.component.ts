@@ -13,7 +13,7 @@ import { AuthService } from 'src/app/services/auth.service';
 export class LoginComponent implements OnInit {
 
   creds: Credenciais = {
-    email: 'dave-fernandes-dev@gmail.com',
+    email: 'dave.fernandes.dev@gmail.com',
     senha: '123'
   }
 
