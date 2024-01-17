@@ -14,7 +14,7 @@ export class LoginComponent implements OnInit {
 
   creds: Credenciais = {
     email: 'dave.fernandes.dev@gmail.com',
-    senha: '123'
+    senha: '123456'
   }
 
   email = new FormControl(null, Validators.email);
